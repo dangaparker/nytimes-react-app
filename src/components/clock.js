@@ -14,7 +14,7 @@ class Clock extends Component{
                 <h1>The time is: <Time time={this.state.time}/></h1>
             </div>
         )
-    }
+    } 
     tick(){
         this.setState({
             time: new Date()
