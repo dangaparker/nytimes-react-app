@@ -13,18 +13,28 @@ class SignIn extends Component{
         }
     }
 
+    handleChange(e){
+        const {name, value} = e.target;
+        const {form} = this.state;
+        this.setState({form: {...form, [name]: value}})
+    }
+    handleFormSubmit(e){
+        e.preventDefault();
+        console.log(this.state.form)
 
+    }
 
     render(){
+        const {email, password} = this.state.form;
         return (
-            <form>
+            <form onSubmit={(e)=>{this.handleFormSubmit}}>
                 <div>
                     <label>Email</label>
-                    <input type="text"/>
+                    <input type="text" value={email} name='email' onChange={(e)=>this.handleChange(e)}/>
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type="text"/>
+                    <input type="text" value={password} name='password' onChange={(e)=>this.handleChange(e)}/>
                 </div>
                 <button>Sign In </button>
             </form>
