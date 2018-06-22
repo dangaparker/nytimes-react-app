@@ -1,5 +1,5 @@
 import React from 'react';
-import beach from '../beach1.jpg'
+import beach from '../beach1.jpgk'
 
 export default () => {
 
