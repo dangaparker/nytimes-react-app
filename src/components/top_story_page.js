@@ -5,32 +5,22 @@ import axios from 'axios';
 const ROOT_URL = "https://api.nytimes.com/svc/topstories/v2"
 const API_KEY = "e8c448d58e55459b80b909578b959737"
 
-class TopStory extends Component {
+class TopStories extends Component {
     constructor(props){
         super(props)
-
-        this.state= {data: {}}
-        
-    }
-    
-
-    async selectCategory(term) {
-        const resp = await axios.get(`${ROOT_URL}/${term}.json?api-key=${API_KEY}`)
-        console.log(resp)
-        this.renderNewPage(resp)
-    }
-
-    renderNewPage(){
-        
     }
 
     render() {
+        console.log('propppp', this.props.data[0])
+        if(!this.props.data[0]){
+            return <h1>loading</h1>
+        }
         return (
             <div>
-                <li><Link onClick={this.selectCategory.bind(this, this.props.item)} to={`/topstories`}>{this.props.item}</Link></li>
+                <h1>{this.props.data[0].section}</h1>
             </div>
         )
     }
 }
 
-export default TopStory
+export default TopStories
