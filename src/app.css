@@ -5,3 +5,49 @@
 .show{
     display: block
 }
+
+h3{
+    text-align: center
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+}
+.dd-header{
+    display: flex;
+    justify-content: space-between;
+    width: 10em;
+    border: gray 1px solid;
+    padding: .5em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-container{
+    display: flex;
+    
+}
+
+.go-btn{
+    border: gray solid 1px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dd-list{
+    list-style: none;
+    height: 14em;
+    overflow-y: scroll;
+    padding-left: 0.6em;
+    margin-top: .2em;
+    border: 1px solid gray;
+    border-radius: 5px; 
+}
+
+.menu-container{
+
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
