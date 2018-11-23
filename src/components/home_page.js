@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import '../app.css';
+import NYTimesLogo from '../assets/images/ny-times.png'
 
 import TopStories from './top_story_page';
 
@@ -17,7 +18,8 @@ class HomePage extends Component {
             data: {},
             hasSelected: false,
             selectedCategory: '',
-            showMenu: false
+            showMenu: false,
+            title: 'Category'
         }
 
         this.showMenu = this.showMenu.bind(this);
@@ -32,43 +34,30 @@ class HomePage extends Component {
     }
 
     closeMenu(event) {
-        if (!this.dropdownMenu.contains(event.target)) {
-            this.setState({ showMenu: false }, () => {
-                document.removeEventListener('click', this.closeMenu);
-            });
+        // if (!this.dropdownMenu.contains(event.target)) 
+        this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+        });
 
-        }
+
     }
 
     handleClick(term) {
+        this.setState({ showMenu: false })
+        this.setState({ title: term })
         this.setState((state) => ({ selectedCategory: term }))
     }
-    handleSubmit = async event => {
+    handleSubmit = event => {
         event.preventDefault();
-        const category = this.state.selectedCategory
-        const response = await axios.get(`${ROOT_URL}/${category}.json?api-key=${API_KEY}`)
-        const data = response.data.results;
-        this.setState({ data })
-        this.setState({ hasSelected: true })
-
     }
-    componentDidMount() {
-        console.log('hello')
-    }
-
-    toggleList() {
-        console.log('switch')
-        this.setState(prevState => ({
-            showMenu: !prevState.showMenu
-        }))
-    }
-
 
     render() {
-        console.log('cat', this.state.selectedCategory)
-        const categoryArray = ["home", "opinion", "world", "national", "politics", "upshot", "nyregion",
-            "business", "technology", "science", "health", "sports", "arts", "books", "movies", "theater", "sundayreview",
-            "fashion", "tmagazine", "food", "travel", "magazine", "realestate", "automobiles", "obituaries", "insider"]
+
+
+        console.log('data', this.state.data)
+        const categoryArray = ["home", "opinion", "world", "national", "politics",
+            "business", "technology", "science", "health", "sports", "arts", "books", "movies", "theater",
+            "fashion", "food", "travel", "magazine", "realestate", "automobiles", "obituaries", "insider"]
 
 
         const listCategories = categoryArray.map((term, index) => {
@@ -80,37 +69,27 @@ class HomePage extends Component {
 
         return (
             <div className='container'>
-                <h3>NY Times Articles</h3>
+                    <img className="nyt-logo" src={NYTimesLogo} alt="" />
+                <div className="title-container">
+                    <h2 className="front-page-title">NY Times Articles</h2>
+                </div>
                 <form className={this.state.hasSelected ? 'hide' : 'show form'} onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="menu-container">
-                        <div className="drop-down-container">
-                            <div className="header-container">
-                                <div className="dd-header" onClick={this.showMenu}>
-
-                                    <div className="dd-title">Category</div>
-
-                                    <i className="material-icons">
-                                        arrow_drop_down</i>
-
-                                </div>
-                                <button className="go-btn">go</button>
+                    <div className="drop-down-container">
+                        <div className="header-container">
+                            <div className="dd-header" onClick={this.showMenu}>
+                                <div className="dd-title">{this.state.title}</div>
+                                <i className="material-icons">
+                                    arrow_drop_down</i>
                             </div>
-
-                            {this.state.showMenu ? (
-                                <ul className="dd-list" ref={(element) => {
-                                    this.dropdownMenu = element
-                                }}>{listCategories}</ul>)
-                                : null}
-
+                            <Link className="anchor" to={`topstories/${this.state.title}`}><p className="go-btn">go</p></Link>
                         </div>
 
-
+                        {this.state.showMenu ? (
+                            <ul className="dd-list"
+                            >{listCategories}</ul>)
+                            : null}
                     </div>
                 </form>
-                <div className={this.state.hasSelected ? 'show' : 'hide'}>
-                    <TopStories data={this.state.data} />
-                </div>
-
             </div>
         )
     }
