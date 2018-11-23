@@ -1,3 +1,18 @@
+body{
+    font-family: "filson";
+}
+
+.nyt-logo{
+    width: 10%;
+    margin: 1em;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
 .hide{
     display: none;
 }
@@ -6,8 +21,9 @@
     display: block
 }
 
-h3{
-    text-align: center
+.front-page-title{
+    margin-top: 1em;
+    text-align: center;
 }
 
 .form{
@@ -22,32 +38,96 @@ h3{
     padding: .5em;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
+}
+
+.dd-header:hover{
+    background-color: lightgray;
 }
 
 .header-container{
     display: flex;
+    margin-top: 1.2em;
     
 }
 
-.go-btn{
+.anchor{
     border: gray solid 1px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
+.anchor .go-btn{
+    text-decoration: none;
+    color: black;
+    font-size: 1em;
+    border: none;
+    padding: 0 .4em;
+
+}
+
+.anchor:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.back-to-search{
+    margin-top: 1em;
+    width: 94%;
+    position: absolute;
+    top: 2%;
+}
+
+.back-to-search i:hover{
+    cursor: pointer;
+}
+
+
 
 .dd-list{
     list-style: none;
     height: 14em;
     overflow-y: scroll;
-    padding-left: 0.6em;
     margin-top: .2em;
     border: 1px solid gray;
     border-radius: 5px; 
+    padding: 0.3em .5em;
 }
 
-.menu-container{
+.dd-list-item{
+    cursor: pointer;
+}
 
-    width: 20%;
+.dd-list-item:hover{
+    background-color: lightgray;
+}
+
+.headlines-container{
     display: flex;
-    justify-content: space-between;
+    flex-flow: column;
+    align-items: center
+}
+
+.headlines-section{
+    margin: 1.5em;
+}
+
+.headline-content{
+    display: flex;
+    margin-top: 1em;
+}
+
+.headline-content a{
+    margin: 0 1em;
+}
+
+.headline-content img{
+    border-radius: 8px
+}
+
+@font-face {
+    font-family: filson;
+    src: url(./assets/fonts/Filson-Soft-Light-Webfont/Webfonts/filsonsoft_light_macroman/filsonsoft-light-webfont.woff);
 }

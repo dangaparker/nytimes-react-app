@@ -5,19 +5,62 @@ import axios from 'axios';
 const ROOT_URL = "https://api.nytimes.com/svc/topstories/v2"
 const API_KEY = "e8c448d58e55459b80b909578b959737"
 
+
 class TopStories extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
+
+        this.state = { data: {} }
+    }
+
+    async componentDidMount() {
+        const term = this.props.match.params.term;
+        const response = await axios.get(`${ROOT_URL}/${term}.json?api-key=${API_KEY}`)
+        const data = response.data.results;
+        this.setState({ data })
+        console.log('data', data)
+    }
+
+    navigateBack(){
+        this.props.history.goBack();
     }
 
     render() {
-        console.log('propppp', this.props.data[0])
-        if(!this.props.data[0]){
-            return <h1>loading</h1>
+        console.log('PROPS', this.props)
+
+        if (!this.state.data[0]) {
+            return <h1>loading...</h1>
         }
+
+        const headlines = this.state.data.map((story, index) => {
+            return (
+                <div key={index}>
+                    <div className="headline-content">
+                        <img src={story.multimedia[0].url} alt=""/>
+                        <a target="_blank" href={story.url}><h4>{story.title}</h4></a>
+                        <h5>- {story.byline}</h5>
+                    </div>
+                    <hr />
+                </div>
+
+            )
+        })
+
+
+
         return (
-            <div>
-                <h1>{this.props.data[0].section}</h1>
+            <div className="headlines-container">
+                <div className="back-to-search">
+                    <i className="material-icons" onClick={this.navigateBack.bind(this)}>
+                        arrow_back</i>
+                </div>
+                <div className="category-title">
+                    <h1>{this.state.data[0].section}</h1>
+                </div>
+                
+                <div className="headlines-section">
+                    {headlines}
+                </div>
             </div>
         )
     }
