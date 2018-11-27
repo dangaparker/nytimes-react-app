@@ -4,9 +4,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import TopStories from './top_story_page';
-
 import HomePage from './home_page';
-// import ResultsPage from './results_page';
 
 const App = () => (
     <div>
@@ -14,7 +12,6 @@ const App = () => (
             <Switch>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/topstories/:term" component={TopStories} />
-                {/* <Route path="/results" component={ResultsPage} /> */}
             </Switch>
         </Router>
     </div>

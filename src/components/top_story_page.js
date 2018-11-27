@@ -6,8 +6,6 @@ import newspaper from '../assets/images/newspaper.jpg'
 const ROOT_URL = "https://api.nytimes.com/svc/topstories/v2"
 const API_KEY = "e8c448d58e55459b80b909578b959737"
 
-
-
 class TopStories extends Component {
     constructor(props) {
         super(props)
