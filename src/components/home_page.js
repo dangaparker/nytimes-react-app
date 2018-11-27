@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
 import '../app.css';
-import styled, {createGlobalStyle} from 'styled-components'
-
+import styled from 'styled-components'
 
 import NYTimesLogo from '../assets/images/ny-times.png'
-
-
 import TopStories from './top_story_page';
 
 const ROOT_URL = "https://api.nytimes.com/svc/topstories/v2"
 const API_KEY = "e8c448d58e55459b80b909578b959737"
+
+
 
 
 const Logo = styled.img`
@@ -144,11 +143,9 @@ class HomePage extends Component {
         return (
             <Container>
                 <Logo className="nyt-logo" src={NYTimesLogo} alt="" />
-                <div className="title-container">
-                    <Title>New York Times Top Stories</Title>
-                </div>
+                <Title>New York Times Top Stories</Title>
                 <Form className={this.state.hasSelected ? 'hide' : 'show'} onSubmit={this.handleSubmit.bind(this)}>
-                    <div className="drop-down-container">
+                    <div>
                         <DropHeaderContainer>
                             <DropHeader onClick={this.showMenu}>
                                 <div>{this.state.searchTerm}</div>
