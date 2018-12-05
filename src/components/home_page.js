@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import '../app.css';
 import styled from 'styled-components'
 
+
 import NYTimesLogo from '../assets/images/ny-times.png'
 import TopStories from './top_story_page';
 
@@ -62,7 +63,7 @@ const DropList = styled.ul`
     padding: 0.3em .5em;
     `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link) `
     border: gray solid 1px;
     border-radius: 5px;
     cursor: pointer;
@@ -115,12 +116,12 @@ class HomePage extends Component {
     }
 
     handleClick(term) {
-        this.setState({ 
-            showMenu: false, 
+        this.setState({
+            showMenu: false,
             searchTerm: term,
         })
         this.setState((state) => ({ selectedCategory: term }))
-        
+
     }
     handleSubmit = event => {
         event.preventDefault();
@@ -131,7 +132,7 @@ class HomePage extends Component {
 
     render() {
         const categoryArray = ["home", "world", "national", "politics", "upshot", "opinion",
-            "business", "technology", "science", "health", "sports", "arts", "books", "movies", 
+            "business", "technology", "science", "health", "sports", "arts", "books", "movies",
             "theater", "food", "travel", "realestate", "automobiles", "obituaries", "insider"]
 
         const listCategories = categoryArray.map((term, index) => {
@@ -141,27 +142,26 @@ class HomePage extends Component {
         })
 
         return (
-            <Container>
-                <Logo className="nyt-logo" src={NYTimesLogo} alt="" />
-                <Title>New York Times Top Stories</Title>
-                <Form className={this.state.hasSelected ? 'hide' : 'show'} onSubmit={this.handleSubmit.bind(this)}>
-                    <div>
-                        <DropHeaderContainer>
-                            <DropHeader onClick={this.showMenu}>
-                                <div>{this.state.searchTerm}</div>
-                                <i className={this.state.showMenu ? 'material-icons arrow-down' : "material-icons"}>
-                                    arrow_drop_down</i>
-                            </DropHeader>
-                            <StyledLink to={`topstories/${this.state.searchTerm}`}><GoBtn className="go-btn">go</GoBtn></StyledLink>
-                        </DropHeaderContainer>
-
-                        {this.state.showMenu ? (
-                            <DropList>
-                            {listCategories}</DropList>)
-                            : null}
-                    </div>
-                </Form>
-            </Container>
+                <Container>
+                    <Logo className="nyt-logo" src={NYTimesLogo} alt="" />
+                    <Title>New York Times Top Stories</Title>
+                    <Form className={this.state.hasSelected ? 'hide' : 'show'} onSubmit={this.handleSubmit.bind(this)}>
+                        <div>
+                            <DropHeaderContainer>
+                                <DropHeader onClick={this.showMenu}>
+                                    <div>{this.state.searchTerm}</div>
+                                    <i className={this.state.showMenu ? 'material-icons arrow-down' : "material-icons"}>
+                                        arrow_drop_down</i>
+                                </DropHeader>
+                                <StyledLink to={`topstories/${this.state.searchTerm}`}><GoBtn className="go-btn">go</GoBtn></StyledLink>
+                            </DropHeaderContainer>
+                            {this.state.showMenu ? (
+                                <DropList>
+                                    {listCategories}</DropList>)
+                                : null}
+                        </div>
+                    </Form>
+                </Container>
         )
     }
 }
